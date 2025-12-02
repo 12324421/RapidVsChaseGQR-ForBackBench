@@ -3,12 +3,7 @@ l.env
 *.log
 *.code-workspace
 
-# Experiment results (can be regenerated)
-FINAL_ANALYSIS_CHARTS.png
-FINAL_REPORT.txt
-performance_comparison.csv
-detailed_statistics.csv
-final_chase_rewriting_*.csv
+# Chat history (not needed in repo)
 history_*.md
 
 scenarios/deep

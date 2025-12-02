@@ -1,0 +1,57 @@
+================================================================================
+Rapid vs ChaseGQR Performance Comparison Report
+Generated: 2025-12-03 04:57:41
+================================================================================
+
+[Experiment Configuration]
+  Scenarios: Deep100, StockExchange, University
+  Queries: 5
+  Systems: ChaseGQR, Rapid
+  Total Tests: 90
+
+[Test Success Rate]
+  ChaseGQR: 45/45 (100%)
+  Rapid: 45/45 (100%)
+
+[Overall Performance]
+  ChaseGQR:
+    Average: 1023.0 ms
+    Std Dev: 1101.1 ms
+    Range: 399 - 4913 ms
+    Tests: 45
+  Rapid:
+    Average: 770.1 ms
+    Std Dev: 55.1 ms
+    Range: 658 - 965 ms
+    Tests: 45
+
+  ⭐ Rapid is 24.7% faster overall
+  ⭐ Rapid is 20.0x more stable (std: 55 vs 1101)
+
+[Performance by Scenario]
+
+  Deep100:
+    ChaseGQR: 538.9 ms (std: 27.1)
+    Rapid: 774.5 ms (std: 20.3)
+
+  StockExchange:
+    ChaseGQR: 1548.3 ms (std: 1690.9)
+    Rapid: 749.0 ms (std: 47.2)
+
+  University:
+    ChaseGQR: 981.7 ms (std: 634.1)
+    Rapid: 786.9 ms (std: 78.1)
+
+[Key Findings]
+  • ChaseGQR is on average 36.4% faster
+  • Rapid wins: 10 queries
+  • Chase wins: 4 queries
+  • Tie wins: 1 queries
+
+[Recommendations]
+  Recommended: Rapid (faster and more stable)
+  • For simple queries: Choose system with better average performance
+  • For complex queries: Choose system with better stability
+  • For production: Consider both performance and stability
+
+================================================================================
