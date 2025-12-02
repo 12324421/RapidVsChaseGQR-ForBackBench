@@ -15,12 +15,11 @@
     "test:unit": "ts-mocha ./test/unit/*.test.ts --pretty",
     "test:integration": "ts-mocha ./test/integration/*.test.ts --pretty",
     "dev": "yarn run build && node dist/test.js",
-    "build": "rm -rf ./dist/ && tsc",
+    "build": "rimraf ./dist/ && tsc",
     "build:prod": "yarn run lint && yarn run test && yarn run build"
   },
   "dependencies": {
     "commander": "2.19.0",
-    "obda-converter": "^0.3.4",
     "pg": "7.8.0",
     "pg-copy-streams": "1.2.0",
     "sparqljs": "2.2.1",
@@ -46,6 +45,7 @@
     "mock-fs": "4.8.0",
     "mockdate": "2.0.2",
     "pegjs": "0.10.0",
+    "rimraf": "^6.1.2",
     "sinon": "7.2.3",
     "ts-mocha": "2.0.0",
     "tslint": "5.12.1",

@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import OBDAconverter from 'obda-converter'
+import OBDAconverter from './obda-converter-stub'
 import { copyFile, readFile, readFileSync, writeFile, readdir, exists, mkdir } from './utils/filesystem'
 import writeLlunaticConfig from './llunatic';
 

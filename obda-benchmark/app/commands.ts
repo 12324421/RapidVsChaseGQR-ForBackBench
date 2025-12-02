@@ -4,7 +4,7 @@ import { resolve } from './utils/filesystem'
 import Logger from './utils/logger'
 import Database from './utils/database'
 import loadData from './load'
-import runScenario from './test'
+// import runScenario from './test'  // Disabled: requires obda-converter
 import computeRewritings from './rewrite'
 import executeUcq from './execute'
 import {
@@ -68,24 +68,27 @@ export async function loadDataCmd(schemaPath : string, dataPath : string) {
 }
 
 export async function runScenarioCmd(ontologyPath : string, queryFolder : string, schemaPath : string) {
-  const logger = new Logger('load', '../logs')
-  const database = new Database(logger)
+  // Disabled: requires obda-converter package
+  console.log('runScenario command is currently disabled')
+  // const logger = new Logger('load', '../logs')
+  // const database = new Database(logger)
 
-  await database.connect()
+  // await database.connect()
 
-  queryFolder = resolve(queryFolder)
-  ontologyPath = resolve(ontologyPath)
+  // queryFolder = resolve(queryFolder)
+  // ontologyPath = resolve(ontologyPath)
 
   // for(let i = 0; i < 5; ++i) {
   //   console.log(`+++++ Run ${i + 1} +++++`)
     // const graalTimes = await runScenario(ontologyPath, queryFolder, '.rq', (ontology, query) => execAsync(`java -jar ./tools/obda-benchmark-graal-1.0-SNAPSHOT-spring-boot.jar ${ontology} ${query}`))
-    const rapidTimes = await runScenario(ontologyPath, queryFolder, schemaPath, 'rapid', database)
+    // const rapidTimes = await runScenario(ontologyPath, queryFolder, schemaPath, 'rapid', database)
     // const iqarosTimes = await runScenario(ontologyPath, queryFolder + '-iqaros', '.txt', (ontology, query) => execAsync(`java -jar ./tools/iqaros.jar ${ontology} ${query}`))
     // console.log(graalTimes)
-    console.log(rapidTimes)
+    // console.log(rapidTimes)
     // console.log(iqarosTimes)
-    console.log('+++++')
+    // console.log('+++++')
   // }
+  // await database.close()
 }
 
 export async function computeRewritingsCmd(

@@ -5,7 +5,7 @@
 
 import fs from 'fs'
 import path from 'path'
-import OBDAconverter from 'obda-converter'
+import OBDAconverter from './obda-converter-stub'
 import Timer from './utils/timer'
 import execAsync from './utils/exec'
 import { resolve } from './utils/filesystem'

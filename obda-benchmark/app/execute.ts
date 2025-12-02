@@ -1,6 +1,6 @@
 /* tslint-disable no-unused-expressions */
 
-import OBDAconverter from 'obda-converter'
+import OBDAconverter from './obda-converter-stub'
 import DB from './utils/database'
 import Timer from './utils/timer'
 
