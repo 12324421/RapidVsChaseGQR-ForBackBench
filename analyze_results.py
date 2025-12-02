@@ -88,16 +88,16 @@ def calculate_statistics(df):
 
 def create_charts(df, pivot):
     """Generate 6-panel visualization"""
-    fig = plt.figure(figsize=(20, 12))
-    gs = fig.add_gridspec(2, 3, hspace=0.3, wspace=0.3)
+    fig = plt.figure(figsize=(20, 13))
+    gs = fig.add_gridspec(2, 3, hspace=0.35, wspace=0.3, top=0.95, bottom=0.05)
     
     # Chart 1: Performance by Query
     ax1 = fig.add_subplot(gs[0, 0])
     query_perf = df.groupby(['Query', 'System'])['Time_ms'].mean().unstack()
     query_perf.plot(kind='bar', ax=ax1, color=['#3498db', '#e74c3c'], width=0.7)
-    ax1.set_title('Average Performance by Query', fontsize=14, fontweight='bold')
-    ax1.set_xlabel('Query', fontsize=12)
-    ax1.set_ylabel('Average Time (ms)', fontsize=12)
+    ax1.set_title('Average Performance by Query', fontsize=14, fontweight='bold', pad=10)
+    ax1.set_xlabel('Query', fontsize=12, labelpad=8)
+    ax1.set_ylabel('Average Time (ms)', fontsize=12, labelpad=8)
     ax1.legend(title='System', fontsize=11)
     ax1.grid(axis='y', alpha=0.3)
     plt.setp(ax1.xaxis.get_majorticklabels(), rotation=0)
@@ -106,9 +106,9 @@ def create_charts(df, pivot):
     ax2 = fig.add_subplot(gs[0, 1])
     scenario_perf = df.groupby(['Scenario', 'System'])['Time_ms'].mean().unstack()
     scenario_perf.plot(kind='bar', ax=ax2, color=['#3498db', '#e74c3c'], width=0.7)
-    ax2.set_title('Average Performance by Scenario', fontsize=14, fontweight='bold')
-    ax2.set_xlabel('Scenario', fontsize=12)
-    ax2.set_ylabel('Average Time (ms)', fontsize=12)
+    ax2.set_title('Average Performance by Scenario', fontsize=14, fontweight='bold', pad=10)
+    ax2.set_xlabel('Scenario', fontsize=12, labelpad=12)
+    ax2.set_ylabel('Average Time (ms)', fontsize=12, labelpad=8)
     ax2.legend(title='System', fontsize=11)
     ax2.grid(axis='y', alpha=0.3)
     plt.setp(ax2.xaxis.get_majorticklabels(), rotation=45, ha='right')
@@ -122,9 +122,9 @@ def create_charts(df, pivot):
         mean_ratio = ratios.mean()
         ax3.axvline(mean_ratio, color='green', linestyle='--', linewidth=2,
                    label=f'Mean: {mean_ratio:.2f}')
-        ax3.set_title('Speed Ratio Distribution (Chase/Rapid)', fontsize=14, fontweight='bold')
-        ax3.set_xlabel('Speed Ratio (>1 = Chase faster)', fontsize=12)
-        ax3.set_ylabel('Frequency', fontsize=12)
+        ax3.set_title('Speed Ratio Distribution (Chase/Rapid)', fontsize=14, fontweight='bold', pad=10)
+        ax3.set_xlabel('Speed Ratio (>1 = Chase faster)', fontsize=12, labelpad=8)
+        ax3.set_ylabel('Frequency', fontsize=12, labelpad=8)
         ax3.legend(fontsize=11)
         ax3.grid(axis='y', alpha=0.3)
     
@@ -135,9 +135,9 @@ def create_charts(df, pivot):
         rapid_heatmap = rapid_data.unstack()
         sns.heatmap(rapid_heatmap, annot=True, fmt='.0f', cmap='YlGnBu',
                    ax=ax4, cbar_kws={'label': 'ms'}, linewidths=0.5)
-        ax4.set_title('Rapid Performance Heatmap (ms)', fontsize=14, fontweight='bold')
-        ax4.set_xlabel('Query', fontsize=12)
-        ax4.set_ylabel('Scenario', fontsize=12)
+        ax4.set_title('Rapid Performance Heatmap (ms)', fontsize=14, fontweight='bold', pad=15)
+        ax4.set_xlabel('Query', fontsize=12, labelpad=8)
+        ax4.set_ylabel('Scenario', fontsize=12, labelpad=8)
     
     # Chart 5: ChaseGQR Heatmap
     ax5 = fig.add_subplot(gs[1, 1])
@@ -146,26 +146,26 @@ def create_charts(df, pivot):
         chase_heatmap = chase_data.unstack()
         sns.heatmap(chase_heatmap, annot=True, fmt='.0f', cmap='YlOrRd',
                    ax=ax5, cbar_kws={'label': 'ms'}, linewidths=0.5)
-        ax5.set_title('ChaseGQR Performance Heatmap (ms)', fontsize=14, fontweight='bold')
-        ax5.set_xlabel('Query', fontsize=12)
-        ax5.set_ylabel('Scenario', fontsize=12)
+        ax5.set_title('ChaseGQR Performance Heatmap (ms)', fontsize=14, fontweight='bold', pad=15)
+        ax5.set_xlabel('Query', fontsize=12, labelpad=8)
+        ax5.set_ylabel('Scenario', fontsize=12, labelpad=8)
     
     # Chart 6: Stability Comparison (Boxplot)
     ax6 = fig.add_subplot(gs[1, 2])
     systems = sorted(df['System'].unique())
     data_to_plot = [df[df['System'] == sys]['Time_ms'].values for sys in systems]
-    bp = ax6.boxplot(data_to_plot, labels=systems, patch_artist=True,
+    bp = ax6.boxplot(data_to_plot, tick_labels=systems, patch_artist=True,
                      boxprops=dict(facecolor='lightblue', alpha=0.7),
                      medianprops=dict(color='red', linewidth=2))
-    ax6.set_title('Performance Stability Comparison', fontsize=14, fontweight='bold')
-    ax6.set_xlabel('System', fontsize=12)
-    ax6.set_ylabel('Time (ms)', fontsize=12)
+    ax6.set_title('Performance Stability Comparison', fontsize=14, fontweight='bold', pad=15)
+    ax6.set_xlabel('System', fontsize=12, labelpad=8)
+    ax6.set_ylabel('Time (ms)', fontsize=12, labelpad=8)
     ax6.grid(axis='y', alpha=0.3)
     
     fig.suptitle('Rapid vs ChaseGQR Performance Analysis (Real Experiment Data)',
-                 fontsize=16, fontweight='bold', y=0.98)
+                 fontsize=16, fontweight='bold', y=0.985)
     
-    plt.savefig('FINAL_ANALYSIS_CHARTS.png', dpi=150, bbox_inches='tight')
+    plt.savefig('FINAL_ANALYSIS_CHARTS.png', dpi=150, bbox_inches='tight', pad_inches=0.3)
     print("✓ Saved: FINAL_ANALYSIS_CHARTS.png")
 
 def generate_report(df, pivot, global_stats, scenario_stats):
